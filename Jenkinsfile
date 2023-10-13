@@ -3,7 +3,7 @@ pipeline {
      stages {
         stage('Testing maven') {
              steps {
-                 sh """mvn -version"""
+                 sh """mvn clean compile"""
              }
         }
      }
