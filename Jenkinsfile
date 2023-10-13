@@ -1,7 +1,7 @@
 pipeline {
      agent any
      stages {
-        stage('Testing maven') {
+        stage('maven clean compile') {
              steps {
                  sh """mvn clean compile"""
              }
