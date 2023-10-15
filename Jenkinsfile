@@ -13,7 +13,7 @@ pipeline {
         }
         stage('maventest Sonarqube'){
              steps{
-                sh """mvn sonarqube:sonarqube"""
+                sh """mvn sonar:sonar"""
              }
         }
      }
