@@ -70,6 +70,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>5SAE4-G1-stationski</finalName>
 	</build>
 
 </project>
