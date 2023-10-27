@@ -1,10 +1,18 @@
 pipeline {
      agent any
      stages {
-        stage('Testing maven') {
+        stage('mvn clean') {
              steps {
-                 sh """mvn -version"""
+                echo "Maven Clean";
+                 sh 'mvn clean';
              }
+        }
+
+        stage('mvn compile'){
+            steps{
+                echo "Maven Compile";
+                sh 'mvn compile';
+            }
         }
      }
 }
