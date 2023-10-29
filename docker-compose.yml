@@ -8,6 +8,10 @@ services:
       - 3307:3306
     volumes:
       - db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: 'stationSki'
+      MYSQL_USER: 'root'
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
 
   springboot:
     depends_on:
