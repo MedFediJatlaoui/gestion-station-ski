@@ -60,8 +60,6 @@
 			<id>deploymentRepo</id>
 			<name>Nexus Repository</name>
 			<url>http://localhost:8081/repository/maven-releases/</url>
-			<username>admin</username>
-			<password>nexus</password>
 		</repository>
 	</distributionManagement>
 
