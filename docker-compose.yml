@@ -1,4 +1,4 @@
-version: "1"
+version: "3"
 
 services:
   mysqldb:
@@ -8,6 +8,7 @@ services:
       - 3307:3306
     volumes:
       - db:/var/lib/mysql
+
   springboot:
     depends_on:
       - mysqldb
@@ -19,5 +20,6 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
-  volumes:
-    db:
+
+volumes:
+  db:
