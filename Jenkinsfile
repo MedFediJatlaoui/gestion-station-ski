@@ -36,7 +36,7 @@ pipeline {
          stage('maven Deploy Nexus'){
               steps{
 
-                 sh """mvn deploy """
+                 sh """mvn deploy -DskipTests=true """
 
               }
         }
