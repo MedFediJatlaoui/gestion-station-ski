@@ -13,7 +13,9 @@ pipeline {
         }
         stage('maventest Sonarqube'){
              steps{
-                sh """mvn sonar:sonar"""
+
+                sh """mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube """
+                
              }
         }
      }
