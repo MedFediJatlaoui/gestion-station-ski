@@ -18,6 +18,34 @@ pipeline {
                 
              }
         }
+         stage('maven Package'){
+             steps{
+
+                 sh """mvn package -DskipTests """
+
+             }
+        }
+         stage('maven Package'){
+              steps{
+
+                 sh """mvn package -DskipTests """
+
+              }
+        }
+         stage('maven Install Package'){
+              steps{
+
+                 sh """mvn install """
+
+              }
+        }
+         stage('maven Deploy Nexus'){
+              steps{
+
+                 sh """mvn deploy """
+
+              }
+        }
      }
 }
 
