@@ -25,13 +25,7 @@ pipeline {
 
              }
         }
-         stage('maven Package'){
-              steps{
 
-                 sh """mvn package -DskipTests """
-
-              }
-        }
          stage('maven Install Package'){
               steps{
 
