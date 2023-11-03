@@ -33,7 +33,8 @@ pipeline {
         }
         stage('Docker image'){
              steps{
-                 sh """docker build -t fediijat/gestionstationski . """
+                 sh ''' docker login -u fediijat -p kopp92i11
+                 docker build -t fediijat/gestionstationski . '''
              }
         }
         stage('Docker Push'){
