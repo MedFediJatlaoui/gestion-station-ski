@@ -38,6 +38,8 @@ pipeline {
          stage('docker image') {
             steps{
                 sh 'docker build -t stationsky .'
+                sh 'docker tag stationsky:latest malekbenrabah/stationsky:latest'
+
             }
          }
 
@@ -45,7 +47,6 @@ pipeline {
               steps{
                   script{
                       sh 'docker login -u "malekbenrabah" -p "sFDbd)NRiRyc;x8" docker.io'
-                      sh 'docker tag stationsky:latest malekbenrabah/stationsky:latest'
                       sh 'docker push malekbenrabah/stationsky:latest'
                   }
               }
@@ -53,7 +54,7 @@ pipeline {
 
           stage('docker compose') {
               steps{
-                  sh 'docker-compose up -d'
+                  sh 'docker compose up -d'
               }
           }
 
