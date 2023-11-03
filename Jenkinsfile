@@ -39,6 +39,18 @@ pipeline {
                  sh """mvn deploy -DskipTests=true """
 
               }
+         stage('Docker image'){
+              steps{
+
+                 sh """docker build -t fediijat/gestionstationski . """
+
+             }
+         stage('Docker Push'){
+             steps{
+
+                 sh """ docker push  fediijat/gestionstationski """
+
+             }
         }
      }
 }
