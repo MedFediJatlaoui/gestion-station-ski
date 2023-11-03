@@ -42,9 +42,9 @@ pipeline {
                  sh """ docker push  fediijat/gestionstationski """
              }
         }
-        stage('Docker Push'){
+        stage('Docker COMPOSE'){
            steps{
-                         sh """ docker push  fediijat/gestionstationski """
+                         sh """ docker-compose up"""
                      }
                 }
      }
