@@ -10,7 +10,6 @@ services:
       - db:/var/lib/mysql
     environment:
       MYSQL_DATABASE: 'stationSki'
-      MYSQL_USER: 'root'
       MYSQL_ALLOW_EMPTY_PASSWORD: true
 
   springboot:
@@ -24,6 +23,10 @@ services:
       - .m2:/root/.m2
     stdin_open: true
     tty: true
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/stationSki?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
 
 volumes:
   db:
