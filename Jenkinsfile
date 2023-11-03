@@ -41,5 +41,19 @@ pipeline {
             }
          }
 
+          stage('docker push'){
+              steps{
+                  script{
+                      sh 'docker login -u "malekbenrabah" -p "sFDbd)NRiRyc;x8" docker.io'
+                      sh 'docker tag stationsky:latest malekbenrabah/stationsky:latest'
+                      sh 'docker push malekbenrabah/stationsky:latest'
+                  }
+              }
+          }
+
+
+
+
+
      }
 }
