@@ -1,9 +1,9 @@
 pipeline {
      agent any
      stages {
-        stage('Testing maven') {
+        stage('Git') {
              steps {
-                 sh """mvn -version"""
+                 git branch: 'sofiene_mazlout_5SAE4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
              }
         }
      }
