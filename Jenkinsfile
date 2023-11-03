@@ -42,5 +42,10 @@ pipeline {
                  sh """ docker push  fediijat/gestionstationski """
              }
         }
+        stage('Docker Push'){
+           steps{
+                         sh """ docker push  fediijat/gestionstationski """
+                     }
+                }
      }
 }

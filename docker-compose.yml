@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  mysqldb:
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: stationSki
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+  gestionstationski:
+    image: fediijat/gestionstationski
+    ports:
+      - "8089:8089"
+    depends_on:
+      - mysqldb
+    environment:
+      - spring.datasource.url=jdbc:mysql://mysqldb:3306/stationSki?createDatabaseIfNotExist=true
+
+volumes:
+  db:
+
