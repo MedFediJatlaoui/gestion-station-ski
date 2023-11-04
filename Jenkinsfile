@@ -15,18 +15,25 @@ pipeline {
             }
         }
 
+         stage('sonar'){
+           steps{
+                echo "Sonar";
+                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+           }
+         }
+
+        stage('junit & mockito') {
+            steps {
+                sh 'mvn test'
+            }
+        }
+
+
         stage('mvn package'){
           steps{
               echo "mvn package";
               sh 'mvn package -DskipTests=true'
           }
-        }
-
-        stage('sonar'){
-           steps{
-                echo "Sonar";
-                sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
-           }
         }
 
         stage('nexus') {
