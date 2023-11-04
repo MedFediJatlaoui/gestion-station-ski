@@ -15,11 +15,6 @@ pipeline {
             }
         }
         
-        stage('jacoco') {
-            steps {
-                sh 'mvn clean verify'
-            }
-        }
 
         stage('sonar'){
            steps{
