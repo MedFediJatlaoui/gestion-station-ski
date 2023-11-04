@@ -14,13 +14,19 @@ pipeline {
                 sh 'mvn compile';
             }
         }
+        
+        stage('jacoco') {
+            steps {
+                sh 'mvn clean verify'
+            }
+        }
 
-         stage('sonar'){
+        stage('sonar'){
            steps{
                 echo "Sonar";
                 sh 'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
            }
-         }
+        }
 
         stage('junit & mockito') {
             steps {
