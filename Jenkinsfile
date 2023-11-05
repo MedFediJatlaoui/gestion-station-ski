@@ -28,6 +28,11 @@ pipeline {
                     sh 'mvn  deploy -DskipTests  '
                     }
                     }
+            stage("build docker image") {
+                    steps {
+                      sh 'docker build -t sofienemazl/sofiene-mazlout-5sae4-g2-gestion-station-ski.jar .'
+                    }
+                  }
 
      }
 
