@@ -15,6 +15,12 @@ pipeline {
             }
         }
 
+         stage('junit & mockito') {
+            steps {
+                sh 'mvn test'
+            }
+         }
+
 
         stage('sonar'){
            steps{
@@ -23,11 +29,7 @@ pipeline {
            }
         }
 
-        stage('junit & mockito') {
-            steps {
-                sh 'mvn test'
-            }
-        }
+
 
 
         stage('mvn package'){
