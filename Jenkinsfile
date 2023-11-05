@@ -30,7 +30,7 @@ pipeline {
                     }
             stage("build docker image") {
                     steps {
-                      sh 'docker build -t sofienemazl/sofiene-mazlout-5sae4-g2-gestion-station-ski.jar .'
+                      sh 'docker build -t sofienemaz/sofiene-mazlout-5sae4-g2-gestion-station-ski.jar .'
                     }
                   }
 
