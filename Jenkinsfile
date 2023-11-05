@@ -14,7 +14,7 @@ pipeline {
                 sh 'mvn compile';
             }
         }
-        
+
 
         stage('sonar'){
            steps{
