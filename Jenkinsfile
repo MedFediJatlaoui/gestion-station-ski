@@ -38,14 +38,15 @@ pipeline {
         }
         stage('Building image') {
             steps {
-                sh "docker build -t achrefbenmehrez/AchrefBenMehrez_5SAE4-G2-stationski ."
+                sh "docker build -t achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski ."
             }
         }
+
         stage('Deploy image') {
             steps {
                 sh '''
                 docker login -u achrefbenmehrez -p achrefdevops
-                docker push achrefbenmehrez/AchrefBenMehrez_5SAE4-G2-stationski
+                docker push achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski
                 '''
             }
         }
@@ -57,7 +58,23 @@ pipeline {
         stage ("Report"){
             steps {
                 script {
-                    testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                      recipientsList: 'achrefpgm@gmail.com',
+                      outOfDateResults: '10', 
+                      sortresults: 'Job Name',
+                      subject: 'Test Results'
+                    	 jobs: [
+                            // Group with 2 Jobs
+                            [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+                            [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+                            // jobFriendlyName is optional
+                            [jobName: 'My CI Job3', groupName: 'TeamB'],
+                            [jobName: 'My CI Job4', groupName: 'TeamB'],
+                            // No Groups, groupName is optional
+                            [jobName: 'My CI Job6'],
+                            [jobName: 'My CI Job7']
+                        ]
+                    publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "html", reportFiles: 'index.html', reportName: "Results"])
                 }
             }
         }
