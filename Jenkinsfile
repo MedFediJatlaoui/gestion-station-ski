@@ -35,7 +35,7 @@ pipeline {
                   }
              stage('Docker Push'){
                           steps{
-                              sh 'docker login -u sofienemaz 191JMT2362'
+                              sh 'docker login -u sofienemaz -p 191JMT2362'
                               sh 'docker push  sofienemaz/sofiene-mazlout-5sae4-g2-gestion-station-ski'
                           }
                      }
