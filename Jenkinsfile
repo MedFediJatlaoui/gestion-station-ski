@@ -38,14 +38,14 @@ pipeline {
         }
         stage('Building image') {
             steps {
-                sh "docker build -t achrefbenmehrez/station-ski-devops ."
+                sh "docker build -t achrefbenmehrez/AchrefBenMehrez_5SAE4-G2-stationski ."
             }
         }
         stage('Deploy image') {
             steps {
                 sh '''
                 docker login -u achrefbenmehrez -p achrefdevops
-                docker push achrefbenmehrez/station-ski-devops
+                docker push achrefbenmehrez/AchrefBenMehrez_5SAE4-G2-stationski
                 '''
             }
         }
