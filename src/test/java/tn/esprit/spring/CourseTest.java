@@ -6,18 +6,19 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Course;
+import tn.esprit.spring.entities.Support;
+import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.repositories.ICourseRepository;
 import tn.esprit.spring.services.CourseServicesImpl;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -30,60 +31,72 @@ public class CourseTest {
     private ICourseRepository courseRepository;
 
     @BeforeEach
-    public void init() {
+    public void setup() {
         MockitoAnnotations.initMocks(this);
     }
 
     @Test
     public void testRetrieveAllCourses() {
-        // Arrange
-        List<Course> courses = Arrays.asList(new Course(), new Course());
-        when(courseRepository.findAll()).thenReturn(courses);
 
-        // Act
+        Course course1 = new Course(1L, 1, TypeCourse.INDIVIDUAL, Support.SKI, 100.0f, 60, Collections.emptySet());
+        Course course2 = new Course(2L, 2, TypeCourse.COLLECTIVE_ADULT, Support.SNOWBOARD, 150.0f, 90, Collections.emptySet());
+
+        List<Course> courses = new ArrayList<>();
+        courses.add(course1);
+        courses.add(course2);
+
+        Mockito.when(courseRepository.findAll()).thenReturn(courses);
+
         List<Course> result = courseServices.retrieveAllCourses();
 
-        // Assert
+        assertNotNull(result);
         assertEquals(2, result.size());
+        assertTrue(result.contains(course1));
+        assertTrue(result.contains(course2));
     }
 
     @Test
     public void testAddCourse() {
-        // Arrange
-        Course course = new Course();
-        when(courseRepository.save(course)).thenReturn(course);
 
-        // Act
+        Course course = new Course(1L, 1, TypeCourse.INDIVIDUAL, Support.SKI, 100.0f, 60, Collections.emptySet());
+
+        Mockito.when(courseRepository.save(course)).thenReturn(course);
+
         Course result = courseServices.addCourse(course);
 
-        // Assert
+        assertNotNull(result);
         assertEquals(course, result);
     }
 
     @Test
     public void testUpdateCourse() {
-        // Arrange
-        Course course = new Course();
-        when(courseRepository.save(course)).thenReturn(course);
 
-        // Act
+        Course course = new Course(1L, 1, TypeCourse.INDIVIDUAL, Support.SKI, 100.0f, 60, Collections.emptySet());
+
+        Mockito.when(courseRepository.save(course)).thenReturn(course);
+
         Course result = courseServices.updateCourse(course);
 
-        // Assert
+        assertNotNull(result);
         assertEquals(course, result);
     }
 
     @Test
     public void testRetrieveCourse() {
-        // Arrange
-        Long numCourse = 1L;
-        Course course = new Course();
-        when(courseRepository.findById(numCourse)).thenReturn(Optional.of(course));
 
-        // Act
-        Course result = courseServices.retrieveCourse(numCourse);
+        Long courseNumber = 1L;
+        Course course = new Course(1L, 1, TypeCourse.INDIVIDUAL, Support.SKI, 100.0f, 60, Collections.emptySet());
 
-        // Assert
+        Mockito.when(courseRepository.findById(courseNumber)).thenReturn(Optional.of(course));
+
+        Course result = courseServices.retrieveCourse(courseNumber);
+
+        assertNotNull(result);
         assertEquals(course, result);
     }
+
+
+
+
+
 }
