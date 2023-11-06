@@ -1,9 +1,14 @@
 package tn.esprit.spring;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.spring.entities.*;
 import tn.esprit.spring.repositories.IPisteRepository;
 import tn.esprit.spring.services.IPisteServices;
@@ -16,28 +21,29 @@ import java.util.ArrayList;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.junit.Assert.assertEquals;
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class PisteServicesImplTest {
-    // Vous pouvez déclarer des objets mocks ici.
     @Mock
     private IPisteRepository pisteRepository;
 
 
     @InjectMocks
-    private IPisteServices pisteServices;
-
+    private PisteServicesImpl pisteServices;
+    @Before
+    public void setUp() {
+        MockitoAnnotations.openMocks(this);
+    }
     @Test
     public void testRetrieveAllPistes() {
-        // Créez des données fictives pour le test.
+
         List<Piste> pistes = new ArrayList<>();
         Piste piste1 = new Piste();
         piste1.setNumPiste(1L);
         pistes.add(piste1);
 
-        // Configurez le comportement de votre objet mock pisteRepository.
         when(pisteRepository.findAll()).thenReturn(pistes);
 
-        // Appelez la méthode de service que vous souhaitez tester.
+
         List<Piste> result = pisteServices.retrieveAllPistes();
 
         // Vérifiez si le résultat est correct.
