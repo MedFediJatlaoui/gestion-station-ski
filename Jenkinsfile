@@ -55,7 +55,9 @@ pipeline {
             }
         }
         stage ("Report"){
-            testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+            steps {
+                testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+            }
         }
     }
 }
