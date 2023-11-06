@@ -11,6 +11,11 @@ pipeline {
                 sh """mvn compile"""
              }
         }
+         stage('Mockito test'){
+                     steps{
+                        sh """mvn test """
+                     }
+                }
         stage('maventest Sonarqube'){
              steps{
                 sh """mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube """
