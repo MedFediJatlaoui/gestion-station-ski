@@ -54,5 +54,8 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
+        stage ("Report"){
+            testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+        }
     }
 }
