@@ -56,7 +56,23 @@ pipeline {
         }
         stage ("Report"){
             steps {
-                testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+                testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                      recipientsList: 'achrefpgm@gmail.com',
+                      outOfDateResults: '10', 
+                      sortresults: 'Job Name',
+                      subject: 'Test Results'
+                    	 jobs: [
+                            // Group with 2 Jobs
+                            [jobName: 'My CI Job1', jobFriendlyName: 'Job 1', groupName: 'TeamA'],
+                            [jobName: 'My CI Job2', jobFriendlyName: 'Job 2', groupName: 'TeamA'],
+                            // jobFriendlyName is optional
+                            [jobName: 'My CI Job3', groupName: 'TeamB'],
+                            [jobName: 'My CI Job4', groupName: 'TeamB'],
+                            // No Groups, groupName is optional
+                            [jobName: 'My CI Job6'],
+                            [jobName: 'My CI Job7']
+                        ]
+                publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "html", reportFiles: 'index.html', reportName: "Results"])
             }
         }
     }
