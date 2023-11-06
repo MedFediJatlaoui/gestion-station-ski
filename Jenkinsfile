@@ -1,10 +1,58 @@
 pipeline {
-     agent any
-     stages {
-        stage('Testing maven') {
-             steps {
-                 sh """mvn -version"""
-             }
+    agent any
+    stages {
+        stage('GIT') {
+            steps {
+                script {
+                    checkout([$class: 'GitSCM',
+                        branches: [[name: 'Achref_BenMehrez_5SAE4']],
+                        userRemoteConfigs: [[
+                            url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
+                        ]]
+                    ])
+                }
+            }
         }
-     }
+        stage('Maven Clean and Compile') {
+            steps {
+                sh ''' 
+                    mvn clean compile
+                    mvn package -DskipTests
+                '''
+            }
+        }
+        stage('Unit tests') {
+            steps {
+                sh "mvn test"
+            }
+        }
+        stage('MVN SonarQube') {
+            steps {
+                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonarqube -Dorg.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL=86400"
+            }
+        }
+        stage('Nexus') {
+            steps {
+                sh "mvn deploy -DskipTests"
+            }
+        }
+        stage('Building image') {
+            steps {
+                sh "docker build -t achrefbenmehrez/station-ski-devops ."
+            }
+        }
+        stage('Deploy image') {
+            steps {
+                sh '''
+                docker login -u achrefbenmehrez -p achrefdevops
+                docker push achrefbenmehrez/station-ski-devops
+                '''
+            }
+        }
+        stage('Docker compose') {
+            steps {
+                sh "docker compose up -d"
+            }
+        }
+    }
 }
