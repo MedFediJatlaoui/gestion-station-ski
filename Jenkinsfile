@@ -58,7 +58,7 @@ pipeline {
         stage ("Report"){
             steps {
                 script {
-                    junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: '/test-results//*.xml'
+                    junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: '**/target/surefire-reports/*.xml'
                     testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
                     outOfDateResults: '10',
                     sortresults: 'Build Number',
