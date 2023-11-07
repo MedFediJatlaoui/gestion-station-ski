@@ -55,18 +55,18 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
-        post {
-            always {
-                junit '**/target/test-classes/**/*.xml'
-                emailext(
-                    subject: 'Build Report - ${currentBuild.fullDisplayName}',
-                    body: '''<h1>Build Report</h1>
-                            <p>Build URL: ${BUILD_URL}</p>
-                            <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
-                    recipientProviders: [culprits(), requestor()],
-                    attachmentsPattern: '**/target/test-classes/**/*.xml'
-                )
-            }
+    }
+    post {
+        always {
+            junit '**/target/test-classes/**/*.xml'
+            emailext(
+                subject: 'Build Report - ${currentBuild.fullDisplayName}',
+                body: '''<h1>Build Report</h1>
+                        <p>Build URL: ${BUILD_URL}</p>
+                        <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
+                recipientProviders: [culprits(), requestor()],
+                attachmentsPattern: '**/target/test-classes/**/*.xml'
+            )
         }
     }
 }
