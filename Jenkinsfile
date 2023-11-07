@@ -59,7 +59,8 @@ pipeline {
             steps {
                 script {
                     stage("Report") {
-                        testResultsAggregator(jobs: [[jobName: 'Pipeline station ski']], recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn')
+                        //testResultsAggregator(jobs: [[jobName: 'Pipeline station ski']], recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn')
+                        testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail', recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn', outOfDateResults: '10', sortresults: 'Job Name', subject: 'Test Results', jobs: [[jobName: 'Pipeline station ski']]
                     }
                 }
             }
