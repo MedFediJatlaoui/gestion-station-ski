@@ -59,14 +59,27 @@ pipeline {
     post {
         always {
             junit '**/target/surefire-reports/*.xml'
-            emailext(
-                subject: 'Build Report - ${currentBuild.fullDisplayName}',
-                body: '''<h1>Build Report</h1>
-                        <p>Build URL: ${BUILD_URL}</p>
-                        <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
-                recipientProviders: [culprits(), requestor()],
-                attachmentsPattern: '**/target/surefire-reports/*.xml'
-            )
+            step([$class: 'TestResultAggregator',
+                location: '**/target/surefire-reports/',
+                healthScaleFactor: 1.0,
+                unstableThreshold: '80',
+                unstableNewThreshold: '80',
+                failedThreshold: '100',
+                useCache: true
+            ])
         }
+        emailext(
+            subject: 'Build Report - ${currentBuild.fullDisplayName}',
+            body: '''<h1>Build Report</h1>
+                    <p>Build URL: ${BUILD_URL}</p>
+                    <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
+            recipientProviders: [culprits(), requestor()],
+            presendScript: '''
+                import hudson.tasks.junit.*;
+                def junitPublisher = currentBuild.rawBuild.getAction(hudson.tasks.junit.JUnitResultAction.class)
+                def testResult = junitPublisher.getResult()
+                manager.addShortText("Tests: ${testResult.getTotalCount()}, Failures: ${testResult.getFailCount()}", "yellow", "white", "1")
+            '''
+        )
     }
 }
