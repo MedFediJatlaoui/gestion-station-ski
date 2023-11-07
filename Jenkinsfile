@@ -58,14 +58,14 @@ pipeline {
     }
     post {
         always {
-            junit '**/target/test-classes/**/*.xml'
+            junit '**/target/surefire-reports/*.xml'
             emailext(
                 subject: 'Build Report - ${currentBuild.fullDisplayName}',
                 body: '''<h1>Build Report</h1>
                         <p>Build URL: ${BUILD_URL}</p>
                         <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
                 recipientProviders: [culprits(), requestor()],
-                attachmentsPattern: '**/target/test-classes/**/*.xml'
+                attachmentsPattern: '**/target/surefire-reports/*.xml'
             )
         }
     }
