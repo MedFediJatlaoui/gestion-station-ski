@@ -55,18 +55,13 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
-    }
-    post {
-        always {
-            junit '**/target/surefire-reports/*.xml'
-            step([$class: 'TestResultAggregator',
-                location: '**/target/surefire-reports/',
-                healthScaleFactor: 1.0,
-                unstableThreshold: '80',
-                unstableNewThreshold: '80',
-                failedThreshold: '100',
-                useCache: true
-            ])
-        }
+        stage('Report')
+            steps {
+                script {
+                    stage ("Report"){
+                        testResultsAggregator jobs:[[jobName: 'Pipeline station ski']]
+                    }
+                }
+            }
     }
 }
