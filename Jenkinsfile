@@ -58,7 +58,16 @@ pipeline {
         stage ("Report"){
             steps {
                 script {
-                    testResultsAggregator jobs:[[jobName: 'Pipeline station ski'],]
+                    junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: '/test-results//*.xml'
+                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                    outOfDateResults: '10',
+                    sortresults: 'Build Number',
+                    subject: 'Test Results',
+                    jobs: [
+                    [jobName: 'Pipeline station ski']
+                    ]
+                    publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true,
+                    reportDir: "$WORKSPACE/test-results", reportFiles: 'index.html', reportName: "Aggregator Results"])
                 }
             }
         }
