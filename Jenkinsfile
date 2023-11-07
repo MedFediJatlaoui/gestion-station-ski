@@ -58,7 +58,7 @@ pipeline {
         stage ("Report"){
             steps {
                 script {
-                    testResultsAggregator jobs:[[jobName: 'My CI Job1'], [jobName: 'My CI Job2'], [jobName: 'My CI Job3']]
+                    testResultsAggregator jobs:[[jobName: 'Pipeline station ski'],]
                 }
             }
         }
