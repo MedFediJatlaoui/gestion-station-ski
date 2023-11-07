@@ -74,7 +74,14 @@ pipeline {
                             [jobName: 'My CI Job6'],
                             [jobName: 'My CI Job7']
                         ]
-                    publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true, reportDir: "html", reportFiles: 'index.html', reportName: "Results"])
+                    publishHTML(target: [
+                        allowMissing: true,
+                        alwaysLinkToLastBuild: true,
+                        keepAll: true,
+                        reportDir: './html',  // Use a relative path
+                        reportFiles: 'index.html',
+                        reportName: 'Results'
+                    ])
                 }
             }
         }
