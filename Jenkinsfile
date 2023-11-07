@@ -60,6 +60,7 @@ pipeline {
                 script {
                     stage ("Report"){
                         testResultsAggregator jobs:[[jobName: 'Pipeline station ski']]
+                        recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn'
                     }
                 }
             }
