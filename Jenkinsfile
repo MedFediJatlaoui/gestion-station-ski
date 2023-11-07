@@ -58,7 +58,7 @@ pipeline {
         stage('Report') {
             steps {
                 script {
-                    testResultsAggregator columns: 'Job, Build, Status, Total, Pass, Fail', 
+                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail', 
                     recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn', 
                     outOfDateResults: '10', 
                     sortresults: 'Job Name', 
