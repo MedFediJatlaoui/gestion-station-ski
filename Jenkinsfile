@@ -55,18 +55,17 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
-        stage ("Report"){
-            steps {
-                script {
-                    junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: '**/target/surefire-reports/*.xml'
-                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
-                    outOfDateResults: '10',
-                    sortresults: 'Build Number',
-                    subject: 'Test Results',
-                    recipientsList: 'achrefpgm@gmail.com,achref.benmehrez@esprit.tn'
-                    jobs: [[jobName: 'Pipeline station ski']]
-                    data: jobs: [[jobName: 'Pipeline station ski']]
-                }
+        post {
+            always {
+                junit '**/target/test-classes/**/*.xml'
+                emailext(
+                    subject: 'Build Report - ${currentBuild.fullDisplayName}',
+                    body: '''<h1>Build Report</h1>
+                            <p>Build URL: ${BUILD_URL}</p>
+                            <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
+                    recipientProviders: [culprits(), requestor()],
+                    attachmentsPattern: '**/target/test-classes/**/*.xml'
+                )
             }
         }
     }
