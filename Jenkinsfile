@@ -55,7 +55,7 @@ pipeline {
                 sh "docker compose up -d"
             }
         }
-        stage('Report')
+        stage('Report') {
             steps {
                 script {
                     stage ("Report"){
@@ -63,5 +63,6 @@ pipeline {
                     }
                 }
             }
+        }
     }
 }
