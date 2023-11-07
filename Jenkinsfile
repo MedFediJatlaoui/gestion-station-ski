@@ -67,8 +67,6 @@ pipeline {
                     [jobName: 'Pipeline station ski']
                     ]
                     recipientsList: 'achrefpgm@gmail.com,achref.benmehrez@esprit.tn'
-                    publishHTML(target: [allowMissing: true, alwaysLinkToLastBuild: true, keepAll: true,
-                    reportDir: "$WORKSPACE/test-results", reportFiles: 'index.html', reportName: "Aggregator Results"])
                 }
             }
         }
