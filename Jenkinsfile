@@ -65,6 +65,7 @@ pipeline {
                     subject: 'Test Results',
                     recipientsList: 'achrefpgm@gmail.com,achref.benmehrez@esprit.tn'
                     jobs: [[jobName: 'Pipeline station ski']]
+                    data: jobs: [[jobName: 'Pipeline station ski']]
                 }
             }
         }
