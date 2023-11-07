@@ -59,14 +59,13 @@ pipeline {
             steps {
                 script {
                     junit skipMarkingBuildUnstable: true, skipPublishingChecks: true, testResults: '**/target/surefire-reports/*.xml'
-                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
-                    outOfDateResults: '10',
-                    sortresults: 'Build Number',
-                    subject: 'Test Results',
-                    jobs: [
-                    [jobName: 'Pipeline station ski']
-                    ]
-                    recipientsList: 'achrefpgm@gmail.com,achref.benmehrez@esprit.tn'
+                    testResultsAggregator 
+                        columns: 'Job, Build, Status, Percentage, Total, Pass, Fail',
+                        outOfDateResults: '10',
+                        sortresults: 'Build Number',
+                        subject: 'Test Results',
+                        recipientsList: 'achrefpgm@gmail.com,achref.benmehrez@esprit.tn'
+                        jobs: [[jobName: 'Pipeline station ski']]
                 }
             }
         }
