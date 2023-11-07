@@ -68,18 +68,5 @@ pipeline {
                 useCache: true
             ])
         }
-        emailext(
-            subject: 'Build Report - ${currentBuild.fullDisplayName}',
-            body: '''<h1>Build Report</h1>
-                    <p>Build URL: ${BUILD_URL}</p>
-                    <p>Full Report: ${JENKINS_URL}${JOB_URL}testReport</p>''',
-            recipientProviders: [culprits(), requestor()],
-            presendScript: '''
-                import hudson.tasks.junit.*;
-                def junitPublisher = currentBuild.rawBuild.getAction(hudson.tasks.junit.JUnitResultAction.class)
-                def testResult = junitPublisher.getResult()
-                manager.addShortText("Tests: ${testResult.getTotalCount()}, Failures: ${testResult.getFailCount()}", "yellow", "white", "1")
-            '''
-        )
     }
 }
