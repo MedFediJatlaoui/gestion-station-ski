@@ -1,16 +1,12 @@
 pipeline {
      agent any
      stages {
-        stage('maven clean') {
+        stage('maven clean compile') {
              steps {
                  sh """mvn clean compile"""
              }
         }
-        stage('maven compile'){
-             steps{
-                sh """mvn compile"""
-             }
-        }
+
          stage('Mockito test'){
                      steps{
                         sh """mvn test """
@@ -26,25 +22,25 @@ pipeline {
                  sh """mvn package -DskipTests=true """
              }
         }
-        stage('maven Install Package'){
+        stage('Install .m2 '){
              steps{
-                 sh """mvn install -DskipTests=true """
+                 sh """mvn install  """
              }
         }
         stage('maven Deploy Nexus'){
              steps{
-                 sh """mvn deploy -DskipTests=true """
+                 sh """mvn deploy  """
              }
         }
         stage('Docker image'){
              steps{
                  sh ''' docker login -u fediijat -p kopp92i11
-                 docker build -t fediijat/gestionstationski . '''
+                 docker build -t fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski . '''
              }
         }
         stage('Docker Push'){
              steps{
-                 sh """ docker push  fediijat/gestionstationski """
+                 sh """ docker push  fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski """
              }
         }
         stage('Docker COMPOSE'){
