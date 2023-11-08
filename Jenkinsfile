@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Maven clean/install') {
                    steps {
-                     sh 'mvn clean install -Dmaven.test.skip=true'
+                     sh 'mvn clean install'
                    }
                  }
         stage('Maven Compile') {
@@ -22,10 +22,15 @@ pipeline {
                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
               }
             }
+         stage("MOCKITO") {
+               steps {
+                 sh "mvn test"
+               }
+             }
             stage('Maven Nexus')
                     {
                     steps {
-                    sh 'mvn  deploy -DskipTests  '
+                    sh 'mvn  deploy'
                     }
                     }
             stage("build docker image") {
