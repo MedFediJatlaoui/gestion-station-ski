@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Maven clean/install') {
                    steps {
-                     sh 'mvn clean install -Dmaven.test.skip=true'
+                     sh 'mvn clean install '
                    }
                  }
         stage('Maven Compile') {
                      steps {
-                         sh 'mvn clean compile -Dmaven.test.skip=true'
+                         sh 'mvn clean compile'
                      }
                  }
          stage("SONARQUBE") {
@@ -30,7 +30,7 @@ pipeline {
             stage('Maven Nexus')
                     {
                     steps {
-                    sh 'mvn  deploy -DskipTests'
+                    sh 'mvn  deploy'
                     }
                     }
             stage("build docker image") {
