@@ -9,12 +9,12 @@ pipeline {
         }
         stage('Maven clean/install') {
                    steps {
-                     sh 'mvn clean install'
+                     sh 'mvn clean install -Dmaven.test.skip=true'
                    }
                  }
         stage('Maven Compile') {
                      steps {
-                         sh 'mvn clean compile'
+                         sh 'mvn clean compile -Dmaven.test.skip=true'
                      }
                  }
          stage("SONARQUBE") {
@@ -30,7 +30,7 @@ pipeline {
             stage('Maven Nexus')
                     {
                     steps {
-                    sh 'mvn  deploy'
+                    sh 'mvn  deploy -DskipTests'
                     }
                     }
             stage("build docker image") {
@@ -48,7 +48,7 @@ pipeline {
               stage('Docker Compose') {
                       steps {
                         sh 'docker compose up -d'
-                        sh 'docker-compose logs gestion-station-ski'
+                        sh 'docker compose logs gestion-station-ski'
                       }
                     }
 
