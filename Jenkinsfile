@@ -72,10 +72,17 @@ pipeline {
               steps {
                   script {
                       currentBuild.result = currentBuild.currentResult
-                      emailext attachLog: true,
-                          subject: "Rapport de construction - ${currentBuild.currentResult}",
-                          body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}",
-                          to: "malek.benrabah2@gmail.com"
+                      def buildStatus = currentBuild.currentResult
+                      def recipientEmail = "malek.benrabah@esprit.tn"
+                      def buildUrl = env.BUILD_URL
+                      def buildLog = currentBuild.rawBuild.getLog()
+
+                      emailext subject: "Rapport de construction - ${buildStatus}",
+                          body: "Le pipeline Jenkins a été exécuté avec le statut : ${buildStatus}\n\n" +
+                                "Détails de la construction : ${buildUrl}\n\n",
+                          to: recipientEmail,
+                          attachLog: true,
+                          attachmentsPattern: 'build.log'
                   }
               }
           }
