@@ -75,7 +75,7 @@ pipeline {
                       emailext attachLog: true,
                           subject: "Rapport de construction - ${currentBuild.currentResult}",
                           body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}",
-                          to: "votre@email.com"
+                          to: "malek.benrabah2@gmail.com"
                   }
               }
           }
