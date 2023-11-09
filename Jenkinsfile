@@ -68,5 +68,17 @@ pipeline {
               }
           }
 
+          stage('Notification par e-mail') {
+              steps {
+                  script {
+                      currentBuild.result = currentBuild.currentResult
+                      emailext attachLog: true,
+                          subject: "Rapport de construction - ${currentBuild.currentResult}",
+                          body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}",
+                          to: "votre@email.com"
+                  }
+              }
+          }
+
      }
 }

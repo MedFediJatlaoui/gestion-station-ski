@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Support;
 import tn.esprit.spring.entities.TypeCourse;
@@ -19,7 +18,7 @@ import tn.esprit.spring.services.CourseServicesImpl;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+
 
 @ExtendWith(MockitoExtension.class)
 public class CourseTest {
