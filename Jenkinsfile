@@ -68,24 +68,32 @@ pipeline {
               }
           }
 
-          stage('Notification par e-mail') {
+          stage('mail') {
               steps {
                   script {
                       currentBuild.result = currentBuild.currentResult
                       def buildStatus = currentBuild.currentResult
-                      def recipientEmail = "malek.benrabah@esprit.tn"
+                      def recipientEmail = "malek.benrabah2@gmail.com"
                       def buildUrl = env.BUILD_URL
-                      def buildLog = currentBuild.logFile
+                      def buildName = env.JOB_NAME
+                      def buildDate = new Date().format('yyyy-MM-dd HH:mm:ss')
+                      def buildPercentage = currentBuild.duration * 100 / currentBuild.estimatedDuration
+                      def buildTotal = currentBuild.durationString
 
                       emailext subject: "Rapport de construction - ${buildStatus}",
-                          body: "Le pipeline Jenkins a été exécuté avec le statut : ${buildStatus}\n\n" +
+                          body: "Nom du pipeline : ${buildName}\n" +
+                                "Date de construction : ${buildDate}\n" +
+                                "Statut : ${buildStatus}\n" +
+                                "Pourcentage d'exécution : ${buildPercentage}%\n" +
+                                "Durée totale : ${buildTotal}\n" +
                                 "Détails de la construction : ${buildUrl}\n\n",
                           to: recipientEmail,
                           attachLog: true,
-                          attachmentsPattern: buildLog
+                          attachmentsPattern: currentBuild.logFile
                   }
               }
           }
+
 
      }
 }
