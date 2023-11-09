@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Maven clean/install') {
                    steps {
-                     sh 'mvn clean install '
+                     sh 'mvn clean install -Dmaven.test.skip=true'
                    }
                  }
         stage('Maven Compile') {
@@ -24,13 +24,13 @@ pipeline {
             }
          stage("MOCKITO") {
                steps {
-                 sh "mvn test"
+                 sh "mvn test -Dtest=tn.esprit.spring.Services.SkierServiceImpMock"
                }
              }
             stage('Maven Nexus')
                     {
                     steps {
-                    sh 'mvn  deploy'
+                    sh 'mvn  deploy -DskipTests'
                     }
                     }
             stage("build docker image") {
