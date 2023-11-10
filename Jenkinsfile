@@ -17,16 +17,17 @@ pipeline {
                          sh 'mvn clean compile'
                      }
                  }
+                  stage("MOCKITO") {
+                                steps {
+                                  sh "mvn test -Dtest=tn.esprit.spring.Services.SkierServiceImpMock"
+                                }
+                              }
          stage("SONARQUBE") {
               steps {
                sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
               }
             }
-         stage("MOCKITO") {
-               steps {
-                 sh "mvn test -Dtest=tn.esprit.spring.Services.SkierServiceImpMock"
-               }
-             }
+
             stage('Maven Nexus')
                     {
                     steps {
