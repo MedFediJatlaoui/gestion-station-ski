@@ -34,5 +34,16 @@ pipeline {
                         sh 'mvn  deploy -DskipTests'
                         }
                         }
+                         stage("build docker image") {
+                                            steps {
+                                              sh 'docker build -t ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest .'
+                                            }
+                                          }
+                                     stage('Docker Push'){
+                                                  steps{
+                                                      sh 'docker login -u ahmedkaabar -p azerty123'
+                                                      sh 'docker push  ahmedkaabar/sahmed-kaabar-5sae4-g2-gestion-station-ski'
+                                                  }
+                                             }
 }
 }
