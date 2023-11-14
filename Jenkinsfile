@@ -4,7 +4,7 @@ pipeline {
          {
             stage('Git') {
                  steps {
-                     git branch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
+              //       git branch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
                  }
             }
 //             stage('Maven clean/install') {
