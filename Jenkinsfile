@@ -42,7 +42,7 @@ pipeline {
                                      stage('Docker Push'){
                                                   steps{
                                                       sh 'docker login -u ahmedkaabar -p azerty123'
-                                                      sh 'docker push  ahmedkaabar/sahmed-kaabar-5sae4-g2-gestion-station-ski'
+                                                      sh 'docker push  ahmedkaabar/sahmed-kaabar-5sae4-g2-gestion-station-ski:latest'
                                                   }
                                              }
 }
