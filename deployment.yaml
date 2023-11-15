@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gestionstationski-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gestionstationski
+  template:
+    metadata:
+      labels:
+        app: gestionstationski
+    spec:
+      containers:
+        - name: gestionstationski
+          image: fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski
+          ports:
+            - containerPort: 8089
