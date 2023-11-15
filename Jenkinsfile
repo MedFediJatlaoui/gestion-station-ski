@@ -39,7 +39,7 @@ pipeline {
                       sh 'docker build -t sofienemaz/sofiene-mazlout-5sae4-g2-gestion-station-ski:latest .'
                     }
                   }
-             stage("build Angular docker image") {
+             /*stage("build Angular docker image") {
                                 steps {
                                        script {
                                  git branch: 'main', url: 'https://github.com/sofiene10/Angular.git'
@@ -49,7 +49,7 @@ pipeline {
                                      sh 'docker build -t sofienemaz/angular:latest -f Dockerfile .'
 
                                      }
-                              } }
+                              } }*/
                 /*stage("Build Angular Docker Image") {
                          steps {
                              script {
