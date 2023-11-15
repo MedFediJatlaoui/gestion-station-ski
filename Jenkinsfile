@@ -44,10 +44,10 @@ pipeline {
                                        script {
                                  git branch: 'main', url: 'https://github.com/sofiene10/Angular.git'
                                  // Navigate to the Angular frontend project directory
-                                 dir('Angular') {
+
                                      // Build the Angular frontend Docker image
-                                     sh 'docker build -t sofienemaz/angular:latest -f ./Dockerfile . '
-                                 }
+                                     sh 'docker build -t sofienemaz/angular:latest -f Dockerfile .'
+
                                      }
                               } }
                 /*stage("Build Angular Docker Image") {
