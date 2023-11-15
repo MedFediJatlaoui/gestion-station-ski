@@ -5,7 +5,6 @@ pipeline {
         stage('Git') {
              steps {
                  git branch: 'sofiene_mazlout_5SAE4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
-                 git branch: 'main', url: 'https://github.com/sofiene10/Angular.git'
              }
         }
         stage('Maven clean/install') {
@@ -43,6 +42,7 @@ pipeline {
                 stage("Build Angular Docker Image") {
                          steps {
                              script {
+                                 git branch: 'main', url: 'https://github.com/sofiene10/Angular.git'
                                  // Navigate to the Angular frontend project directory
                                  dir('Angular') {
                                      // Build the Angular frontend Docker image
