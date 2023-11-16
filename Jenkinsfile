@@ -58,12 +58,7 @@ pipeline {
         stage('Report') {
             steps {
                 script {
-                    testResultsAggregator columns: 'Job, Build, Status, Percentage, Total, Pass, Fail', 
-                    recipientsList: 'achrefbenmehrez1@gmail.com,achref.benmehrez@esprit.tn', 
-                    outOfDateResults: '10', 
-                    sortresults: 'Job Name', 
-                    subject: 'Test Results', 
-                    jobs: [[jobName: 'Pipeline station ski']]
+                    testResultsAggregator afterbody: '', beforebody: '', columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Packages, Files, Classes, Methods, Lines, Conditions, Sonar, Build', compareWithPreviousRun: true, data: [[groupName: '', jobs: [[jobFriendlyName: 'Station Ski', jobName: 'Pipeline station ski']]]], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, outOfDateResults: '', recipientsList: 'achrefpgm@gmail.com', recipientsListBCC: '', recipientsListCC: '', recipientsListIgnored: '', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
                 }
             }
         }
