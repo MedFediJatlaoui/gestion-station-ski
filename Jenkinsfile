@@ -43,18 +43,25 @@ pipeline {
                  sh """ docker push  fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski """
              }
         }
-        stage('Docker COMPOSE'){
-           steps{
-                         sh """ docker compose up -d """
-                     }
-                }
-        stage('Notification par e-mail') {
+       stage('Notification par e-mail') {
            steps {
-              script {
-               emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com'
-                            }
-                            }
-                            }
+               script {
+                   emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com',
+                   attachLog: true,
+                   mimeType: 'text/html',
+                   recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
+                   configurations: [[$class: 'SMTPServer', name: 'SMTP',
+                   hostname: 'smtp.gmail.com',
+                   port: '465',
+                   username: 'mohamedfedi.jatlaoui@esprit.tn',
+                   password: '09894827',
+                   useSsl: false,
+                   smtpAuth: true,
+                   charset: 'UTF-8']]
+               }
+           }
+       }
+
 
 
      }
