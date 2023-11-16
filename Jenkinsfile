@@ -36,7 +36,7 @@ pipeline {
                     }
             stage("build spring docker image") {
                     steps {
-                      sh 'docker build -t sofienemaz/sofiene-mazlout-5sae4-g2-gestion-station-ski:latest --build-arg JAR_URL=http://192.168.56.2:8081/repository/maven-releases/tn/esprit/spring/gestion-station-ski/1.0/gestion-station-ski-1.0.jar .'
+                      sh 'docker build -t sofienemaz/sofiene-mazlout-5sae4-g2-gestion-station-ski:latest .'
 
                     }
 
