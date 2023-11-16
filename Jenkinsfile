@@ -74,6 +74,7 @@ pipeline {
                      currentBuild.result = currentBuild.currentResult
                      def buildNumber = currentBuild.number
                      def buildUrl = env.BUILD_URL
+                     def jobName= env.JOB_NAME
 
                      //prev
                      def previousResult = currentBuild.getPreviousBuild()?.result ?: 'Aucun résultat précédent'
@@ -91,8 +92,8 @@ pipeline {
                      }
 
                      emailext attachLog: true,
-                         subject: "Rapport de construction - ${currentBuild.currentResult}",
-                         body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}\n\n${comparison}",
+                         subject: "${jobName} - ${currentBuild.currentResult}",
+                         body: "Le pipeline Jenkins :${jobName} a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}\n\n${comparison}",
                          to: "malek.benrabah2@gmail.com"
                  }
              }
