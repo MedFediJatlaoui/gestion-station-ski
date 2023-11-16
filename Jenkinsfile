@@ -91,9 +91,22 @@ pipeline {
                          comparison = "C'est la première construction."
                      }
 
+                     // recuperation dernier success build
+                     def lastSuccessfulBuildNumber = 'Aucun build réussi précédent'
+                     def lastSuccessfulBuildTimeAgo = ''
+                     def build = currentBuild.getPreviousBuild()
+                     while (build) {
+                         if (build.result == 'SUCCESS') {
+                             lastSuccessfulBuildNumber = build.number
+                             lastSuccessfulBuildTimeAgo = getTimeAgo(build.timestamp)
+                             break
+                         }
+                         build = build.getPreviousBuild()
+                     }
+
                      emailext attachLog: true,
                          subject: "${jobName} - ${currentBuild.currentResult}",
-                         body: "Le pipeline Jenkins :${jobName} a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}\n${comparison}",
+                         body: "Le pipeline Jenkins :${jobName} a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}\n${comparison}\nDernier build réussi : #${lastSuccessfulBuildNumber} il y a ${lastSuccessfulBuildTimeAgo}",
                          to: "malek.benrabah2@gmail.com"
                  }
              }
