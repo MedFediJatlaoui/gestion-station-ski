@@ -41,10 +41,15 @@ pipeline {
                 sh "docker build -t achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski ."
             }
         }
-
-        stage('Deploy image') {
+        stage("Deploy image") {
             steps {
-                sh "withCredentials([usernameColonPassword(credentialsId: '521921d5-782a-4dad-b7e9-b4be707d7289', variable: 'dockerhub creds')]) {docker push achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski }"
+                script {
+                    withCredentials([usernamePassword(credentialsId: '521921d5-782a-4dad-b7e9-b4be707d7289', usernameVariable: 'DOCKERHUB_USERNAME', passwordVariable: 'DOCKERHUB_PASSWORD')]) {
+                        sh "docker login -u ${DOCKERHUB_USERNAME} -p ${DOCKERHUB_PASSWORD}"
+                        sh "docker push achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski"
+                        sh "docker logout"
+                    }
+                }
             }
         }
         stage('Docker compose') {
