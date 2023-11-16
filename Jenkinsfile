@@ -74,9 +74,25 @@ pipeline {
                      currentBuild.result = currentBuild.currentResult
                      def buildNumber = currentBuild.number
                      def buildUrl = env.BUILD_URL
+
+                     //prev
+                     def previousResult = currentBuild.getPreviousBuild()?.result ?: 'Aucun résultat précédent'
+
+                     //comparaison
+                     def comparison = ''
+                     if (previousResult != 'Aucun résultat précédent') {
+                         if (currentBuild.result == previousResult) {
+                             comparison = "Les résultats sont les mêmes que la construction précédente (${previousResult})."
+                         } else {
+                             comparison = "Les résultats sont différents de la construction précédente (${previousResult})."
+                         }
+                     } else {
+                         comparison = "C'est la première construction."
+                     }
+
                      emailext attachLog: true,
                          subject: "Rapport de construction - ${currentBuild.currentResult}",
-                         body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}",
+                         body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}\n\n${comparison}",
                          to: "malek.benrabah2@gmail.com"
                  }
              }
