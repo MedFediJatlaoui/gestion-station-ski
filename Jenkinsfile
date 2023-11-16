@@ -77,13 +77,7 @@ pipeline {
                             }
                             }
                             }
-        stage('Deployment K8s'){
-           steps{
-                        sh ''' kubectl apply -f mysql-service.yaml
-                               kubectl apply -f service.yaml
-                               kubectl apply -f deployment.yaml '''
-                     }
-                }
+
 
      }
 }
