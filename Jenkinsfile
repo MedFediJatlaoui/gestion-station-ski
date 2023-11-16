@@ -78,6 +78,7 @@ pipeline {
                         to: 'jatlaouimedfedi@gmail.com'
                                 }
                             }
+                            }
         stage('Deployment K8s'){
            steps{
                         sh ''' kubectl apply -f mysql-service.yaml
