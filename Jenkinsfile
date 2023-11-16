@@ -49,16 +49,8 @@ pipeline {
                    emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com',
                    attachLog: true,
                    mimeType: 'text/html',
-                   allowUnregistered: true,
                    recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                   configurations: [[$class: 'SMTPServer', name: 'SMTP',
-                   hostname: 'smtp.gmail.com',
-                   port: '465',
-                   username: 'mohamedfedi.jatlaoui@esprit.tn',
-                   password: '09894827',
-                   useSsl: false,
-                   smtpAuth: true,
-                   charset: 'UTF-8']]
+
                }
            }
        }
