@@ -73,9 +73,10 @@ pipeline {
                  script {
                      currentBuild.result = currentBuild.currentResult
                      def buildNumber = currentBuild.number
+                     def buildUrl = env.BUILD_URL
                      emailext attachLog: true,
                          subject: "Rapport de construction - ${currentBuild.currentResult}",
-                         body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}",
+                         body: "Le pipeline Jenkins a été exécuté avec le statut : ${currentBuild.currentResult}\nNuméro de build : ${buildNumber}\nURL de build : ${buildUrl}",
                          to: "malek.benrabah2@gmail.com"
                  }
              }
