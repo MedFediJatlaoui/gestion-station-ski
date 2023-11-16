@@ -46,10 +46,12 @@ pipeline {
        stage('Notification par e-mail') {
            steps {
                script {
-                  emailext body: 'Test Message',
-                      subject: 'Test Subject',
-                      to: 'jatlaouimedfedi@gmail.com'
-                      }
+                   emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com',
+                   attachLog: true,
+                   mimeType: 'text/html',
+                   recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+
+              }
            }
        }
 
