@@ -44,11 +44,7 @@ pipeline {
 
         stage('Deploy image') {
             steps {
-                sh "
-                withCredentials([usernameColonPassword(credentialsId: '521921d5-782a-4dad-b7e9-b4be707d7289', variable: 'dockerhub creds')]) {
-                    docker push achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski
-                }
-                "
+                sh "withCredentials([usernameColonPassword(credentialsId: '521921d5-782a-4dad-b7e9-b4be707d7289', variable: 'dockerhub creds')]) {docker push achrefbenmehrez/achrefbenmehrez_5sae4-g2-stationski }"
             }
         }
         stage('Docker compose') {
