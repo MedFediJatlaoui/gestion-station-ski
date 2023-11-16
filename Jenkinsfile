@@ -58,7 +58,8 @@ pipeline {
         stage('Report') {
             steps {
                 script {
-                    testResultsAggregator afterbody: '', beforebody: '', columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Packages, Files, Classes, Methods, Lines, Conditions, Sonar, Build', compareWithPreviousRun: true, data: [[groupName: '', jobs: [[jobFriendlyName: 'Station Ski', jobName: 'Pipeline station ski']]]], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, outOfDateResults: '', recipientsList: 'achrefpgm@gmail.com', recipientsListBCC: '', recipientsListCC: '', recipientsListIgnored: '', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
+                    testResultsAggregator columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Packages, Files, Classes, Methods, Lines, Conditions, Sonar, Build', compareWithPreviousRun: true, data: [[jobs: [[jobFriendlyName: 'Station Ski', jobName: 'Pipeline station ski']]]], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, recipientsList: 'achrefpgm@gmail.com', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'html', reportFiles: 'index.html', reportName: 'HTML Report', useWrapperFileDirectly: true])
                 }
             }
         }
