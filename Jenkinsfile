@@ -46,11 +46,8 @@ pipeline {
        stage('Notification par e-mail') {
            steps {
                script {
-                   emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com',
-                   attachLog: true,
-                   mimeType: 'text/html',
-                   recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-
+                   testResultsAggregator columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Build', compareWithPreviousRun: true, jobs: [[jobFriendlyName: 'GestionStationSki', jobName: 'gestion-station-ski-5SAE4-G2']], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, recipientsList: 'achrefpgm@gmail.com', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
+                   publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'html', reportFiles: 'index.html', reportName: 'HTML Report', useWrapperFileDirectly: true])
               }
            }
        }
