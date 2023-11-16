@@ -43,6 +43,11 @@ pipeline {
                  sh """ docker push  fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski """
              }
         }
+        stage('Docker compose') {
+             steps {
+                  sh "docker compose up -d"
+             }
+                }
        stage('Notification par e-mail') {
            steps {
                script {
