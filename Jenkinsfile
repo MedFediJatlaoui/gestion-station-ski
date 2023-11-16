@@ -49,6 +49,8 @@ pipeline {
                    emailext body: 'many men', subject: '$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!', to: 'jatlaouimedfedi@gmail.com',
                    attachLog: true,
                    mimeType: 'text/html',
+                   allowUnregistered: true,
+                   attachLog: true,
                    recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
                    configurations: [[$class: 'SMTPServer', name: 'SMTP',
                    hostname: 'smtp.gmail.com',
