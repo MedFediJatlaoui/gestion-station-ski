@@ -42,7 +42,7 @@ pipeline {
 
                   }
              /*stage("build Angular docker image") {
-             test test
+             test test aaa
                                 steps {
                                        script {
                                  git branch: 'main', url: 'https://github.com/sofiene10/Angular.git'
