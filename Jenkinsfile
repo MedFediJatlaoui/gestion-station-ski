@@ -1,6 +1,12 @@
 pipeline {
      agent any
      stages {
+
+        stage('Checkout') {
+            steps {
+                git branch: 'MalekBenRabah', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
+            }
+        }
         stage('mvn clean') {
              steps {
                 echo "Maven Clean";
