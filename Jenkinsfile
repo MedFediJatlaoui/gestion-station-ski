@@ -58,7 +58,7 @@ pipeline {
         stage('Report') {
             steps {
                 script {
-                    testResultsAggregator columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Packages, Files, Classes, Methods, Lines, Conditions, Sonar, Build', compareWithPreviousRun: true, jobs: [[jobFriendlyName: 'Station Ski', jobName: 'Pipeline station ski']], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, recipientsList: 'achrefpgm@gmail.com', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
+                    testResultsAggregator columns: 'Health, Job, Status, Percentage, Total, Pass, Fail, Skip, Commits, LastRun, Duration, Description, Build', compareWithPreviousRun: true, jobs: [[jobFriendlyName: 'Station Ski', jobName: 'Pipeline station ski']], ignoreAbortedJobs: false, ignoreDisabledJobs: false, ignoreNotFoundJobs: false, ignoreRunningJobs: false, recipientsList: 'achrefpgm@gmail.com', sortresults: 'NAME', subject: 'Test Results', theme: 'light'
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'html', reportFiles: 'index.html', reportName: 'HTML Report', useWrapperFileDirectly: true])
                 }
             }
