@@ -45,5 +45,11 @@ pipeline {
                                                       sh 'docker push  ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest'
                                                   }
                                              }
+                                             stage('Docker Compose') {
+                                                                   steps {
+                                                                     sh 'docker compose up -d'
+
+                                                                   }
+                                                                 }
 }
 }
