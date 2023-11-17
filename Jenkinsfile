@@ -27,7 +27,7 @@ pipeline {
                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
                   }
                 }
-
+//
                 stage('Maven Nexus')
                         {
                         steps {
