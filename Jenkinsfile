@@ -2,6 +2,7 @@ pipeline {
      agent any
      stages
          {
+         emailext body: 'testt', subject: 'starting jenkins', to: 'ahmedkaabar999@gmail.com'
             stage('Git') {
                  steps {
                 git branch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
