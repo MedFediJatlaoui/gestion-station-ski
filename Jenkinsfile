@@ -22,12 +22,12 @@ pipeline {
                                       sh "mvn test -Dtest=tn.esprit.spring.Services.SubscriptionServicesImplMock"
                                     }
                                   }*/
-             stage("SONARQUBE") {
+            /* stage("SONARQUBE") {
                   steps {
                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
                   }
-                }
-//
+                }*/
+
                 stage('Maven Nexus')
                         {
                         steps {
