@@ -105,7 +105,7 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>5SAE4-G1-stationski</finalName>
+		<finalName>5SAE4_G2_GestionStationSki</finalName>
 	</build>
 
 </project>

@@ -46,6 +46,4 @@ public class InstructorServicesImpl implements IInstructorServices{
         instructor.setCourses(courseSet);
         return instructorRepository.save(instructor);
     }
-
-
 }
