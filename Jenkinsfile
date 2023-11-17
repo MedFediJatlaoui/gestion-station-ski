@@ -19,7 +19,7 @@ pipeline {
                      }
                       stage("MOCKITO") {
                                     steps {
-                                      sh "mvn test -Dtest=tn.esprit.spring.Services.SubscriptionServicesImpl"
+                                      sh "mvn test -Dtest=tn.esprit.spring.Services.SubscriptionServicesImplMock"
                                     }
                                   }
              stage("SONARQUBE") {
