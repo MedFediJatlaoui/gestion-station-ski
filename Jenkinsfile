@@ -7,7 +7,7 @@ pipeline {
                  git branch: 'sofiene_mazlout_5SAE4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
              }
         }
-        stage('Maven clean/install') {
+        stage('Maveeeen clean/install') {
                    steps {
                      sh 'mvn clean install -Dmaven.test.skip=true'
                    }
