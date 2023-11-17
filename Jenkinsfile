@@ -17,11 +17,11 @@ pipeline {
                              sh 'mvn clean compile'
                          }
                      }
-                    /*  stage("MOCKITO") {
+                      stage("MOCKITO") {
                                     steps {
-                                      sh "mvn test -Dtest=tn.esprit.spring.Services.SubscriptionServicesImplMock"
+                                      sh "mvn test -Dtest=tn.esprit.spring.SubscriptionServicesImplMock"
                                     }
-                                  }*/
+                                  }
              stage("SONARQUBE") {
                   steps {
                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
