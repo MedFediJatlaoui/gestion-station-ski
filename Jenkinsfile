@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'docker compose up -d'
+                        sh 'docker -compose up -d'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         throw e
