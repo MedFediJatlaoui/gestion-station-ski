@@ -11,7 +11,7 @@ pipeline {
         stage('Git') {
             steps {
                 catchError(buildResult: 'FAILURE') {
-                    git ranch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
+                    git branch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Maven Compile') {
             steps {
                 catchError(buildResult: 'FAILURE') {
-                    sh 'mvn clean compile'
+                    sh 'clean compile'
                 }
             }
         }
