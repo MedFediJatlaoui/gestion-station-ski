@@ -43,7 +43,7 @@ pipeline {
         stage("SONARQUBE") {
             steps {
                 catchError(buildResult: 'FAILURE') {
-                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password="
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
                 }
             }
         }
