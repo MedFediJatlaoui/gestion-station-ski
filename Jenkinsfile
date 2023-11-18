@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        git branch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
+                        git ranch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
                     } catch (Exception e) {
                         currentBuild.result = 'FAILURE'
                         throw new RuntimeException("Git stage failed: ${e.message}")
