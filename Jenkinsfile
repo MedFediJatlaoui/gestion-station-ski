@@ -35,7 +35,7 @@ pipeline {
         stage('Docker image'){
              steps{
                  sh ''' docker login -u fediijat -p kopp92i11
-                 docker build -t fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski . '''
+                  docker build -t fediijat/mohamedfedijatlaoui-5sae4-g2-gestionstationski --build-arg JAR_URL=http://192.168.33.10:8081/repository/maven-releases/tn/esprit/spring/5SAE4-G2-gestion-station-ski/1.0/5SAE4-G2-gestion-station-ski-1.0.jar . '''
              }
         }
         stage('Docker Push'){
