@@ -57,19 +57,10 @@ pipeline {
             }
         }
 
-    stage('Docker Compose') {
-        steps {
-            script {
-                def dockerComposeCmd = bat(script: 'where docker-compose', returnStatus: true).trim()
-                if (dockerComposeCmd == 0) {
-                    bat 'docker-compose up -d'
-                } else {
-                    error 'docker-compose is not installed or not in the PATH'
-                }
+        stage('Docker Compose') {
+            steps {
+                sh 'docker compose up -d'
             }
         }
-    }
-
-
     }
 }
