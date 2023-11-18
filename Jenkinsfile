@@ -83,12 +83,18 @@ pipeline {
     }
 
     post {
-        failure {
-            script {
-                def errorMessage = "The build failed. Please check the Jenkins console output for details."
-                currentBuild.result = 'FAILURE'
-                emailext body: errorMessage, subject: 'Build Failure', to: 'ahmedkaabar999@gmail.com'
-            }
-        }
-    }
-}
+           success {
+               script {
+                   emailext body: 'The build was successful. Congratulations!', subject: 'Build Success', to: 'ahmedkaabar999@gmail.com'
+               }
+           }
+
+           failure {
+               script {
+                   def errorMessage = "The build failed. Please check the Jenkins console output for details."
+                   currentBuild.result = 'FAILURE'
+                   emailext body: errorMessage, subject: 'Build Failure', to: 'ahmedkaabar999@gmail.com'
+               }
+           }
+       }
+   }
