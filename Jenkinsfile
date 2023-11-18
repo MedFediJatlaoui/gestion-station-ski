@@ -59,8 +59,23 @@ pipeline {
 
         stage('Docker Compose') {
             steps {
-                sh 'docker compose up -d'
+                script {
+                    try {
+                        sh 'docker compose up -d'
+                    } catch (Exception e) {
+                        currentBuild.result = 'FAILURE'
+                        throw e
+                    }
+                }
             }
+        }
+    }
+
+    post {
+        failure {
+            emailext body: 'The build failed. Please check the Jenkins console output for details.',
+                      subject: 'Build Failure',
+                      to: 'ahmedkaabar999@gmail.com'
         }
     }
 }
