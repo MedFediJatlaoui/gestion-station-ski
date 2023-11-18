@@ -27,7 +27,7 @@ pipeline {
         stage('Maven Compile') {
             steps {
                 catchError(buildResult: 'FAILURE') {
-                    sh 'clean compile'
+                    sh 'mvn clean compile'
                 }
             }
         }
@@ -43,7 +43,7 @@ pipeline {
         stage("SONARQUBE") {
             steps {
                 catchError(buildResult: 'FAILURE') {
-                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password="
                 }
             }
         }
