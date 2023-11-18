@@ -10,118 +10,73 @@ pipeline {
 
         stage('Git') {
             steps {
-                script {
-                    try {
-                        git ranch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Git stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    git ranch: 'ahmed_kaabar_5sae4', url: 'https://github.com/MedFediJatlaoui/gestion-station-ski.git'
                 }
             }
         }
 
         stage('Maven clean/install') {
             steps {
-                script {
-                    try {
-                        sh 'mvn clean install -Dmaven.test.skip=true'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Maven clean/install stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'mvn clean install -Dmaven.test.skip=true'
                 }
             }
         }
 
         stage('Maven Compile') {
             steps {
-                script {
-                    try {
-                        sh 'mvn clean compile'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Maven Compile stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'mvn clean compile'
                 }
             }
         }
 
         stage("MOCKITO") {
             steps {
-                script {
-                    try {
-                        sh "mvn test -Dtest=tn.esprit.spring.SubscriptionServicesImplMock"
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("MOCKITO stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh "mvn test -Dtest=tn.esprit.spring.SubscriptionServicesImplMock"
                 }
             }
         }
 
         stage("SONARQUBE") {
             steps {
-                script {
-                    try {
-                        sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("SONARQUBE stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh "mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar"
                 }
             }
         }
 
         stage('Maven Nexus') {
             steps {
-                script {
-                    try {
-                        sh 'mvn deploy -DskipTests'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Maven Nexus stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'mvn deploy -DskipTests'
                 }
             }
         }
 
         stage("Build Docker Image") {
             steps {
-                script {
-                    try {
-                        sh 'docker build -t ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest .'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Build Docker Image stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'docker build -t ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest .'
                 }
             }
         }
 
         stage('Docker Push') {
             steps {
-                script {
-                    try {
-                        sh 'docker login -u ahmedkaabar -p azerty123'
-                        sh 'docker push ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Docker Push stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'docker login -u ahmedkaabar -p azerty123'
+                    sh 'docker push ahmedkaabar/ahmed-kaabar-5sae4-g2-gestion-station-ski:latest'
                 }
             }
         }
 
         stage('Docker Compose') {
             steps {
-                script {
-                    try {
-                        sh 'docker compose up -d'
-                    } catch (Exception e) {
-                        currentBuild.result = 'FAILURE'
-                        throw new RuntimeException("Docker Compose stage failed: ${e.message}")
-                    }
+                catchError(buildResult: 'FAILURE') {
+                    sh 'docker compose up -d'
                 }
             }
         }
